@@ -2,6 +2,8 @@
 
 A secure, high-performance, self-contained License Management System and REST API built with Node.js and SQLite.
 
+🌐 **Live Web Dashboard (GitHub Pages)**: [https://laoryt0001.github.io/Dubber-Pro-VIP/](https://laoryt0001.github.io/Dubber-Pro-VIP/)
+
 ---
 
 ## 🌟 Key Features
