@@ -10,6 +10,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
     rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -21,7 +22,7 @@
   <div id="login-view" class="view-container">
     <div class="login-card">
       <div class="brand-header">
-        <div class="brand-icon">🎙️</div>
+        <div class="brand-icon"><i class="bi bi-mic-fill"></i></div>
         <h2>Dubber Pro & VIP</h2>
         <p class="subtitle">License Management Portal</p>
       </div>
@@ -38,7 +39,7 @@
         <div id="login-error" class="error-banner hidden"></div>
         <button type="submit" id="btn-login" class="btn btn-primary btn-block">
           <span>Sign In to Dashboard</span>
-          <span class="btn-arrow">→</span>
+          <span class="btn-arrow"><i class="bi bi-arrow-right"></i></span>
         </button>
       </form>
       <div class="login-footer">
@@ -53,7 +54,7 @@
     <header class="app-header">
       <div class="header-left">
         <div class="logo">
-          <span class="logo-emoji">🎙️</span>
+          <span class="logo-emoji"><i class="bi bi-mic-fill"></i></span>
           <div>
             <h1 class="logo-title">Dubber បីសាច & VIP</h1>
             <span class="logo-tag">License Control Center</span>
@@ -67,13 +68,13 @@
 
       <div class="header-right">
         <button id="btn-docs" class="btn btn-ghost" title="Integration Guide">
-          <span>📖 Client SDK</span>
+          <i class="bi bi-book-half"></i> <span>Client SDK</span>
         </button>
         <div class="user-pill">
-          <span class="user-avatar">👤</span>
+          <span class="user-avatar"><i class="bi bi-person-circle"></i></span>
           <span id="display-username" class="user-name">admin</span>
         </div>
-        <button id="btn-logout" class="btn btn-secondary btn-sm">Logout</button>
+        <button id="btn-logout" class="btn btn-secondary btn-sm"><i class="bi bi-box-arrow-right"></i> <span>Logout</span></button>
       </div>
     </header>
 
@@ -83,7 +84,7 @@
       <section class="stats-grid">
         <div class="stat-card">
           <div class="stat-icon-wrapper blue">
-            <span>🔑</span>
+            <i class="bi bi-key-fill"></i>
           </div>
           <div class="stat-details">
             <span class="stat-label">Total Licenses</span>
@@ -93,7 +94,7 @@
 
         <div class="stat-card">
           <div class="stat-icon-wrapper green">
-            <span>✅</span>
+            <i class="bi bi-check-circle-fill"></i>
           </div>
           <div class="stat-details">
             <span class="stat-label">Active Licenses</span>
@@ -103,7 +104,7 @@
 
         <div class="stat-card">
           <div class="stat-icon-wrapper purple">
-            <span>💻</span>
+            <i class="bi bi-laptop-fill"></i>
           </div>
           <div class="stat-details">
             <span class="stat-label">Activated Devices</span>
@@ -113,7 +114,7 @@
 
         <div class="stat-card">
           <div class="stat-icon-wrapper orange">
-            <span>⚠️</span>
+            <i class="bi bi-exclamation-triangle-fill"></i>
           </div>
           <div class="stat-details">
             <span class="stat-label">Expired / Revoked</span>
@@ -125,7 +126,7 @@
       <!-- Action & Filter Bar -->
       <section class="controls-card">
         <div class="search-box">
-          <span class="search-icon">🔍</span>
+          <span class="search-icon"><i class="bi bi-search"></i></span>
           <input type="text" id="search-input" placeholder="Search by key, customer name, email..."
             class="search-input">
         </div>
@@ -154,11 +155,11 @@
           </select>
 
           <button id="btn-refresh" class="btn btn-secondary" title="Refresh List">
-            🔄 Refresh
+            <i class="bi bi-arrow-clockwise"></i> Refresh
           </button>
 
           <button id="btn-open-create-modal" class="btn btn-primary">
-            <span>+ Generate License</span>
+            <i class="bi bi-plus-circle-fill"></i> <span>Generate License</span>
           </button>
         </div>
       </section>
@@ -198,8 +199,8 @@
   <div id="modal-create" class="modal-backdrop hidden">
     <div class="modal-dialog">
       <div class="modal-header">
-        <h3>✨ Generate New License</h3>
-        <button class="modal-close" data-close="modal-create">&times;</button>
+        <h3><i class="bi bi-stars"></i> Generate New License</h3>
+        <button class="modal-close" data-close="modal-create"><i class="bi bi-x-lg"></i></button>
       </div>
       <form id="create-license-form">
         <div class="modal-body">
@@ -270,19 +271,19 @@
             <div class="checkbox-chips">
               <label class="chip-checkbox">
                 <input type="checkbox" name="feat" value="downloads" checked>
-                <span>🚀 Unlimited Downloads</span>
+                <span><i class="bi bi-cloud-arrow-down-fill"></i> Unlimited Downloads</span>
               </label>
               <label class="chip-checkbox">
                 <input type="checkbox" name="feat" value="batch_mode" checked>
-                <span>📦 Batch Processing</span>
+                <span><i class="bi bi-layers-fill"></i> Batch Processing</span>
               </label>
               <label class="chip-checkbox">
                 <input type="checkbox" name="feat" value="vip_speed" checked>
-                <span>⚡ High-Speed VIP Queue</span>
+                <span><i class="bi bi-lightning-charge-fill"></i> High-Speed VIP Queue</span>
               </label>
               <label class="chip-checkbox">
                 <input type="checkbox" name="feat" value="hd_export" checked>
-                <span>🎬 4K / HD Support</span>
+                <span><i class="bi bi-camera-reels-fill"></i> 4K / HD Support</span>
               </label>
             </div>
           </div>
@@ -295,7 +296,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-close="modal-create">Cancel</button>
-          <button type="submit" class="btn btn-primary">Generate & Issue Key</button>
+          <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i> <span>Generate & Issue Key</span></button>
         </div>
       </form>
     </div>
@@ -306,10 +307,10 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-header">
         <div>
-          <h3>💻 Bound Devices</h3>
+          <h3><i class="bi bi-laptop"></i> Bound Devices</h3>
           <p id="devices-modal-subtitle" class="subtitle text-sm"></p>
         </div>
-        <button class="modal-close" data-close="modal-devices">&times;</button>
+        <button class="modal-close" data-close="modal-devices"><i class="bi bi-x-lg"></i></button>
       </div>
       <div class="modal-body">
         <div class="table-wrapper">
@@ -340,8 +341,8 @@
   <div id="modal-extend" class="modal-backdrop hidden">
     <div class="modal-dialog">
       <div class="modal-header">
-        <h3>⏳ Extend License Expiration</h3>
-        <button class="modal-close" data-close="modal-extend">&times;</button>
+        <h3><i class="bi bi-clock-history"></i> Extend License Expiration</h3>
+        <button class="modal-close" data-close="modal-extend"><i class="bi bi-x-lg"></i></button>
       </div>
       <form id="extend-form">
         <input type="hidden" id="extend-license-id">
@@ -359,7 +360,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-close="modal-extend">Cancel</button>
-          <button type="submit" class="btn btn-primary">Apply Extension</button>
+          <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg"></i> <span>Apply Extension</span></button>
         </div>
       </form>
     </div>
@@ -369,8 +370,8 @@
   <div id="modal-docs" class="modal-backdrop hidden">
     <div class="modal-dialog modal-lg">
       <div class="modal-header">
-        <h3>📖 Client SDK Integration</h3>
-        <button class="modal-close" data-close="modal-docs">&times;</button>
+        <h3><i class="bi bi-code-slash"></i> Client SDK Integration</h3>
+        <button class="modal-close" data-close="modal-docs"><i class="bi bi-x-lg"></i></button>
       </div>
       <div class="modal-body">
         <p class="mb-2">Drop <code>licenseClient.js</code> into your Electron app and activate with:</p>

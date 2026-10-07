@@ -53,7 +53,7 @@
     const container = document.getElementById('toast-container');
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
-    const icon = type === 'success' ? '✅' : '⚠️';
+    const icon = type === 'success' ? '<i class="bi bi-check-circle-fill"></i>' : '<i class="bi bi-exclamation-triangle-fill"></i>';
     toast.innerHTML = `<span>${icon}</span><span>${escapeHtml(message)}</span>`;
     container.appendChild(toast);
     setTimeout(() => {
@@ -190,7 +190,7 @@
       licensesTbody.innerHTML = `
         <tr>
           <td colspan="9" class="empty-state" style="color: var(--accent-rose);">
-            ⚠️ Error loading licenses: ${escapeHtml(err.message)}
+            <i class="bi bi-exclamation-triangle-fill"></i> Error loading licenses: ${escapeHtml(err.message)}
           </td>
         </tr>
       `;
@@ -204,7 +204,7 @@
           <td colspan="9" class="empty-state">
             <p>No licenses found matching your filters.</p>
             <button class="btn btn-primary btn-sm" style="margin-top: 12px;" onclick="document.getElementById('btn-open-create-modal').click()">
-              + Generate First License
+              <i class="bi bi-plus-circle-fill"></i> Generate First License
             </button>
           </td>
         </tr>
@@ -222,8 +222,8 @@
       }
 
       const appBadge = lic.app === 'sdach-moan'
-        ? `<span class="badge" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3);">👑 Sdach Moan</span>`
-        : `<span class="badge" style="background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">🎙️ Dubber Pro</span>`;
+        ? `<span class="badge" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3);"><i class="bi bi-crown-fill me-1"></i> Sdach Moan</span>`
+        : `<span class="badge" style="background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);"><i class="bi bi-mic-fill me-1"></i> Dubber Pro</span>`;
 
       let expiryText = 'Lifetime';
       if (lic.expires_at) {
@@ -241,7 +241,7 @@
           <td>
             <div class="key-badge">
               <span>${escapeHtml(lic.key)}</span>
-              <button class="btn-copy-key" title="Copy Key" data-copy="${escapeHtml(lic.key)}">📋</button>
+              <button class="btn-copy-key" title="Copy Key" data-copy="${escapeHtml(lic.key)}"><i class="bi bi-copy"></i></button>
             </div>
           </td>
           <td>${appBadge}</td>
@@ -254,7 +254,7 @@
           </td>
           <td>
             <a class="device-badge-link" data-action="view-devices" data-id="${lic.id}">
-              💻 ${devicesLabel}
+              <i class="bi bi-laptop me-1"></i> ${devicesLabel}
             </a>
           </td>
           <td>
@@ -267,15 +267,15 @@
           <td class="text-right">
             <div style="display: inline-flex; gap: 6px;">
               <button class="btn btn-secondary btn-sm" data-action="extend" data-id="${lic.id}" data-key="${escapeHtml(lic.key)}" title="Extend Expiration">
-                ⏳ Extend
+                <i class="bi bi-clock-history me-1"></i> Extend
               </button>
               ${lic.status === 'active' ? `
                 <button class="btn btn-danger btn-sm" data-action="revoke" data-id="${lic.id}" data-key="${escapeHtml(lic.key)}" title="Revoke License">
-                  🚫 Revoke
+                  <i class="bi bi-slash-circle me-1"></i> Revoke
                 </button>
               ` : `
                 <button class="btn btn-secondary btn-sm" data-action="delete" data-id="${lic.id}" title="Delete License">
-                  🗑️
+                  <i class="bi bi-trash3-fill"></i>
                 </button>
               `}
             </div>
