@@ -1,0 +1,17 @@
+{
+  "name": "dubber-pro-vip-license-server",
+  "version": "1.0.0",
+  "description": "Production License Management Server & Verification System for Dubber Pro VIP",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "cli": "node cli.js",
+    "test": "node test_server.js"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "keywords": ["license", "management", "activation", "drm", "software-protection", "dubber-pro"],
+  "author": "laoryt0001",
+  "license": "ISC"
+}

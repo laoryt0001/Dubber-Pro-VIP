@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: dubber-pro-vip-server
+    runtime: node
+    plan: free
+    buildCommand: npm install --omit=dev
+    startCommand: node server.js
+    envVars:
+      - key: NODE_VERSION
+        value: 22.14.0
+      - key: PORT
+        value: 10000
+      - key: HOST
+        value: 0.0.0.0
+      - key: DATA_DIR
+        value: ./data
+      - key: ADMIN_USER
+        value: admin
+      - key: ADMIN_PASS
+        generateValue: false
+        value: admin123

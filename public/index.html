@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dubber Pro & VIP - License Management Server</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- LOGIN VIEW -->
+  <div id="login-view" class="view-container">
+    <div class="login-card">
+      <div class="brand-header">
+        <div class="brand-icon">🎙️</div>
+        <h2>Dubber Pro & VIP</h2>
+        <p class="subtitle">License Management Portal</p>
+      </div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label for="login-username">Username</label>
+          <input type="text" id="login-username" class="form-input" placeholder="admin" required autofocus>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" class="form-input" placeholder="••••••••" required>
+        </div>
+        <div id="login-error" class="error-banner hidden"></div>
+        <button type="submit" id="btn-login" class="btn btn-primary btn-block">
+          <span>Sign In to Dashboard</span>
+          <span class="btn-arrow">→</span>
+        </button>
+      </form>
+      <div class="login-footer">
+        <span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD VIEW -->
+  <div id="dashboard-view" class="view-container hidden">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <div class="logo">
+          <span class="logo-emoji">🎙️</span>
+          <div>
+            <h1 class="logo-title">Dubber បីសាច & VIP</h1>
+            <span class="logo-tag">License Control Center</span>
+          </div>
+        </div>
+        <div class="server-badge">
+          <span class="pulse-dot"></span>
+          <span>Server Active</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <button id="btn-docs" class="btn btn-ghost" title="Integration Guide">
+          <span>📖 Client SDK</span>
+        </button>
+        <div class="user-pill">
+          <span class="user-avatar">👤</span>
+          <span id="display-username" class="user-name">admin</span>
+        </div>
+        <button id="btn-logout" class="btn btn-secondary btn-sm">Logout</button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Metric Stats -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon-wrapper blue">
+            <span>🔑</span>
+          </div>
+          <div class="stat-details">
+            <span class="stat-label">Total Licenses</span>
+            <span id="stat-total" class="stat-value">0</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon-wrapper green">
+            <span>✅</span>
+          </div>
+          <div class="stat-details">
+            <span class="stat-label">Active Licenses</span>
+            <span id="stat-active" class="stat-value">0</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon-wrapper purple">
+            <span>💻</span>
+          </div>
+          <div class="stat-details">
+            <span class="stat-label">Activated Devices</span>
+            <span id="stat-devices" class="stat-value">0</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon-wrapper orange">
+            <span>⚠️</span>
+          </div>
+          <div class="stat-details">
+            <span class="stat-label">Expired / Revoked</span>
+            <span id="stat-expired" class="stat-value">0</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Action & Filter Bar -->
+      <section class="controls-card">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-input" placeholder="Search by key, customer name, email..."
+            class="search-input">
+        </div>
+
+        <div class="filters-group">
+          <select id="filter-app" class="filter-select">
+            <option value="">All Applications</option>
+            <option value="dubber-pro">Dubber បីសាច [ Pro ]</option>
+            <option value="sdach-moan">Sdach Moan VIP Downloader</option>
+          </select>
+
+          <select id="filter-status" class="filter-select">
+            <option value="">All Statuses</option>
+            <option value="active">Active</option>
+            <option value="revoked">Revoked</option>
+          </select>
+
+          <select id="filter-plan" class="filter-select">
+            <option value="">All Plans</option>
+            <option value="Dubber Pro Lifetime">Dubber Pro Lifetime</option>
+            <option value="Dubber Pro 1-Year">Dubber Pro 1-Year</option>
+            <option value="Dubber Pro 30-Day">Dubber Pro 30-Day</option>
+            <option value="VIP Lifetime">VIP Lifetime</option>
+            <option value="VIP 1-Year">VIP 1-Year</option>
+            <option value="VIP 30-Day">VIP 30-Day</option>
+          </select>
+
+          <button id="btn-refresh" class="btn btn-secondary" title="Refresh List">
+            🔄 Refresh
+          </button>
+
+          <button id="btn-open-create-modal" class="btn btn-primary">
+            <span>+ Generate License</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Licenses Table -->
+      <section class="table-card">
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>License Key</th>
+                <th>App</th>
+                <th>Customer</th>
+                <th>Plan</th>
+                <th>Devices</th>
+                <th>Expiration</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th class="text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="licenses-tbody">
+              <tr>
+                <td colspan="9" class="empty-state">
+                  <div class="loading-spinner"></div>
+                  <p>Loading license inventory...</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- MODAL: GENERATE LICENSE -->
+  <div id="modal-create" class="modal-backdrop hidden">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>✨ Generate New License</h3>
+        <button class="modal-close" data-close="modal-create">&times;</button>
+      </div>
+      <form id="create-license-form">
+        <div class="modal-body">
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label for="create-app">Application / Product</label>
+            <select id="create-app" class="form-input">
+              <option value="dubber-pro" selected>Dubber បីសាច [ Clone សម្លេង Pro ]</option>
+              <option value="sdach-moan">Sdach Moan Houngguo VIP Downloader</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="create-prefix">Key Prefix</label>
+              <input type="text" id="create-prefix" class="form-input" value="DUB" placeholder="e.g. DUB">
+            </div>
+            <div class="form-group flex-2">
+              <label for="create-plan">Plan Type</label>
+              <select id="create-plan" class="form-input">
+                <option value="Dubber Pro Lifetime" selected>Dubber Pro Lifetime (Never Expires)</option>
+                <option value="Dubber Pro 1-Year">Dubber Pro 1-Year (365 Days)</option>
+                <option value="Dubber Pro 30-Day">Dubber Pro 30-Day (1 Month)</option>
+                <option value="VIP Lifetime">VIP Lifetime (Never Expires)</option>
+                <option value="VIP 30-Day">VIP 30-Day (1 Month)</option>
+                <option value="Custom">Custom Duration</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row" id="custom-days-group" style="display: none;">
+            <div class="form-group flex-1">
+              <label for="create-days">Duration (Days)</label>
+              <input type="number" id="create-days" class="form-input" value="30" min="1">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="create-devices">Max Device Activations</label>
+              <select id="create-devices" class="form-input">
+                <option value="1" selected>1 Machine</option>
+                <option value="2">2 Machines</option>
+                <option value="3">3 Machines</option>
+                <option value="5">5 Machines</option>
+                <option value="10">10 Machines</option>
+                <option value="999">Unlimited (999)</option>
+              </select>
+            </div>
+            <div class="form-group flex-1">
+              <label for="create-custom-key">Custom Key (Optional)</label>
+              <input type="text" id="create-custom-key" class="form-input" placeholder="Auto-generate if empty">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="create-name">Customer Name</label>
+              <input type="text" id="create-name" class="form-input" placeholder="e.g. Sokha Chan">
+            </div>
+            <div class="form-group flex-1">
+              <label for="create-email">Customer Email / Contact</label>
+              <input type="email" id="create-email" class="form-input" placeholder="customer@example.com">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Features & Entitlements</label>
+            <div class="checkbox-chips">
+              <label class="chip-checkbox">
+                <input type="checkbox" name="feat" value="downloads" checked>
+                <span>🚀 Unlimited Downloads</span>
+              </label>
+              <label class="chip-checkbox">
+                <input type="checkbox" name="feat" value="batch_mode" checked>
+                <span>📦 Batch Processing</span>
+              </label>
+              <label class="chip-checkbox">
+                <input type="checkbox" name="feat" value="vip_speed" checked>
+                <span>⚡ High-Speed VIP Queue</span>
+              </label>
+              <label class="chip-checkbox">
+                <input type="checkbox" name="feat" value="hd_export" checked>
+                <span>🎬 4K / HD Support</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="create-notes">Internal Notes</label>
+            <textarea id="create-notes" class="form-input textarea" rows="2"
+              placeholder="Payment ref, Telegram username, etc."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-close="modal-create">Cancel</button>
+          <button type="submit" class="btn btn-primary">Generate & Issue Key</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: DEVICE ACTIVATIONS -->
+  <div id="modal-devices" class="modal-backdrop hidden">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <div>
+          <h3>💻 Bound Devices</h3>
+          <p id="devices-modal-subtitle" class="subtitle text-sm"></p>
+        </div>
+        <button class="modal-close" data-close="modal-devices">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Device ID (HWID)</th>
+                <th>Device Name</th>
+                <th>Operating System</th>
+                <th>IP Address</th>
+                <th>Last Active</th>
+                <th class="text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody id="devices-tbody">
+              <!-- populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-close="modal-devices">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: EXTEND LICENSE -->
+  <div id="modal-extend" class="modal-backdrop hidden">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>⏳ Extend License Expiration</h3>
+        <button class="modal-close" data-close="modal-extend">&times;</button>
+      </div>
+      <form id="extend-form">
+        <input type="hidden" id="extend-license-id">
+        <div class="modal-body">
+          <p id="extend-license-key" class="font-mono text-sm mb-3"></p>
+          <div class="form-group">
+            <label for="extend-days">Add Days</label>
+            <select id="extend-days" class="form-input">
+              <option value="7">+7 Days (1 Week)</option>
+              <option value="30" selected>+30 Days (1 Month)</option>
+              <option value="90">+90 Days (3 Months)</option>
+              <option value="365">+365 Days (1 Year)</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-close="modal-extend">Cancel</button>
+          <button type="submit" class="btn btn-primary">Apply Extension</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: SDK & INTEGRATION GUIDE -->
+  <div id="modal-docs" class="modal-backdrop hidden">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <h3>📖 Client SDK Integration</h3>
+        <button class="modal-close" data-close="modal-docs">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-2">Drop <code>licenseClient.js</code> into your Electron app and activate with:</p>
+        <pre class="code-box"><code>const { LicenseClient } = require('./licenseClient');
+
+const client = new LicenseClient({
+  serverUrl: 'http://localhost:3000'
+});
+
+// Activate license when user enters key
+async function activateApp(userKey) {
+  const result = await client.activate(userKey);
+  if (result.valid) {
+    console.log('License valid for plan:', result.plan);
+    console.log('Features enabled:', result.features);
+  } else {
+    console.error('License error:', result.error);
+  }
+}</code></pre>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-close="modal-docs">Got It</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

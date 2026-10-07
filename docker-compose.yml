@@ -1,0 +1,16 @@
+services:
+  license-server:
+    build: .
+    container_name: dubber-pro-vip-license-server
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOST=0.0.0.0
+      - DATA_DIR=/app/data
+      - ADMIN_USER=admin
+      - ADMIN_PASS=admin123
+    volumes:
+      - ./data:/app/data

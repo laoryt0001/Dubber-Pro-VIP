@@ -1,0 +1,30 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# OS system files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Temporary files & tests outputs
+data/test_license_store.json
+data/*.db-journal
+data/*.db-wal
+data/*.db-shm
+*.tmp
+*.bak
+scratch/
+
+# IDE / Editor folders
+.vscode/
+.idea/
